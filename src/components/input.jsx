@@ -2,15 +2,21 @@ import React, { useRef } from "react";
 import { LoadScript, StandaloneSearchBox } from "@react-google-maps/api";
 
 const libraries = ["places"];
-export default function input({ label, location, setLocation, onPlacesChanged }) {
-  const inputRef = useRef(null);
+export default function Input({
+  label,
+  location,
+  setLocation,
+  onPlacesChanged,
+}) {
   const searchBoxRef = useRef(null);
+
+  const googleMapsApiKey = 'AIzaSyBapAiSYukTGtSuJTilyGnbDoXGp3lt16Y'
 
   return (
     <div className="form-group">
       <label className="block text-gray-700">{label}:</label>
       <LoadScript
-        googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
+        googleMapsApiKey={googleMapsApiKey}
         libraries={libraries}
       >
         <StandaloneSearchBox
@@ -19,7 +25,6 @@ export default function input({ label, location, setLocation, onPlacesChanged })
         >
           <input
             type="text"
-            ref={inputRef}
             className="form-control w-full p-2 border border-gray-300 rounded"
             placeholder={`${label} Location`}
             value={location}

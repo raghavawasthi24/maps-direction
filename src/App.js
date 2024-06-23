@@ -68,12 +68,12 @@ const App = () => {
       <Header />
 
       <div className="flex flex-col items-center">
-        <p className="font-sans text-lg flex justify-center items-center text-blue-500 mt-4">
+        <p className="font-sans text-lg flex justify-center items-center text-blue-600 p-4 font-normal">
           Let's calculate <b>&nbsp;distance&nbsp;</b> from Google maps
         </p>
-        <div className="flex flex-col md:flex-row w-full bg-gray-100 font-sans">
-          <div className="w-full md:w-1/2 p-5">
-            <div className="mt-24 flex flex-col items-start">
+        <div className="flex flex-col md:flex-row w-full bg-gray-100 font-sans px-4">
+          <div className="w-full md:w-1/2 p-5 flex items-center h-fit">
+            <div className="w-[50%]">
               <div className="mb-4 w-3/4">
                 <label htmlFor="originInput" className="block font-bold mb-2">
                   Origin
@@ -115,26 +115,28 @@ const App = () => {
                   />
                 </Autocomplete>
               </div>
+            </div>
+            <div className="">
               <button
-                className="mt-4 px-6 py-2 text-lg bg-blue-600 text-white rounded-full hover:bg-blue-700"
+                className="px-6 py-2 text-lg bg-blue-600 text-white rounded-full hover:bg-blue-700"
                 onClick={calculateRoute}
               >
                 Calculate
               </button>
-              {error && <p className="text-red-500 mt-2">{error}</p>}
-              {distance && (
-                <div className="mt-8">
-                  <p className="text-lg font-bold text-blue-500">
-                    Distance: {distance} kms
-                  </p>
-                  <p>
-                    The Distance between <strong>{origin}</strong> and{" "}
-                    <strong>{destination}</strong> via the selected route is{" "}
-                    <strong>{distance}</strong> kms.
-                  </p>
-                </div>
-              )}
             </div>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
+            {distance && (
+              <div className="mt-8">
+                <p className="text-lg font-bold text-blue-500">
+                  Distance: {distance} kms
+                </p>
+                <p>
+                  The Distance between <strong>{origin}</strong> and{" "}
+                  <strong>{destination}</strong> via the selected route is{" "}
+                  <strong>{distance}</strong> kms.
+                </p>
+              </div>
+            )}
           </div>
           <div className="w-full md:w-1/2 h-full p-5">
             <GoogleMap

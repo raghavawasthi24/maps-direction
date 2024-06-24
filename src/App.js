@@ -31,7 +31,7 @@ const App = () => {
         <p className="font-sans text-lg flex justify-center items-center text-blue-600 p-4 font-normal">
           Let's calculate <b>&nbsp;distance&nbsp;</b> from Google maps
         </p>
-        <div className="flex flex-col md:flex-row w-full bg-gray-100 font-sans px-4">
+        <div className="flex flex-col-reverse md:flex-row w-full bg-gray-100 font-sans px-4">
           <AddVenues
             origin={origin}
             destination={destination}

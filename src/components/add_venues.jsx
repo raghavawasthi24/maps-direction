@@ -29,16 +29,15 @@ export default function AddVenues({
 
   const calculateRoute = () => {
     console.log(stops);
-    // if (!origin || !destination) {
-    //   alert("Please enter both From and To locations.");
-    //   return;
-    // }
+    if (!origin || !destination) {
+      alert("Please enter both From and To locations.");
+      return;
+    }
 
     const waypoints = stops
       .filter((stop) => stop !== "")
       .map((stop) => ({ location: stop, stopover: true }));
 
-    // Call DirectionsService to calculate route
     const directionsService = new window.google.maps.DirectionsService();
     directionsService.route(
       {
@@ -82,9 +81,9 @@ export default function AddVenues({
 
   return (
     <div className="w-full md:w-1/2 p-5 flex flex-col">
-      <div className="flex items-center h-fit justify-between">
-        <div className="w-[50%] grid gap-4">
-          <div className="w-3/4">
+      <div className="flex flex-col items-center md:flex-row h-fit justify-between">
+        <div className="w-full md:w-[50%] grid gap-4">
+          <div className="md:w-[90%]">
             <label htmlFor="originInput" className="block mb-2">
               Origin
             </label>
@@ -108,7 +107,7 @@ export default function AddVenues({
             handlePlaceChanged={handlePlaceChanged}
           />
 
-          <div className="mb-4 w-3/4">
+          <div className="mb-4 w-full md:w-[90%]">
             <label htmlFor="destinationInput" className="block mb-2">
               Destination
             </label>

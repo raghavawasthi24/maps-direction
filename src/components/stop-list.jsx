@@ -1,29 +1,16 @@
 import React, { useRef } from "react";
-import Input from "./input";
 import { Autocomplete } from "@react-google-maps/api";
 import { FaCircleMinus } from "react-icons/fa6";
 import { CiCirclePlus } from "react-icons/ci";
 
-export default function StopsList({
-  stops,
-  setStops,
-  onPlacesChanged,
-  handlePlaceChanged,
-}) {
+export default function StopsList({ stops, setStops }) {
   const handleLocationChange = (ref, index) => {
     const place = ref.current.getPlace();
-    console.log(place.formatted_address);
     if (place && place.formatted_address) {
-      // setState(place.formatted_address);
       const newStops = [...stops];
       newStops[index] = place.formatted_address;
       setStops(newStops);
     }
-
-    // console.log(newLocation);
-    // const newStops = [...stops];
-    // newStops[index] = newLocation;
-    // setStops(newStops);
   };
 
   const handleRemoveStop = (index) => {
@@ -36,15 +23,13 @@ export default function StopsList({
 
   const addStop = () => {
     console.log(stops);
-    // let ar = stops;
-    // const newarr = ar.push("");
     setStops([...stops, ""]);
   };
 
   return (
-    <div className="w-3/4 flex flex-col">
+    <div className="w-full md:w-[90%] flex flex-col">
       {stops.map((stop, index) => (
-        <div key={index}>
+        <div key={index} className="">
           <label htmlFor="originInput" className="block mb-2">
             Stops
           </label>
@@ -52,6 +37,7 @@ export default function StopsList({
             <Autocomplete
               onLoad={(autocomplete) => (originRef.current = autocomplete)}
               onPlaceChanged={() => handleLocationChange(originRef, index)}
+              className="w-full"
             >
               <input
                 id="stops"

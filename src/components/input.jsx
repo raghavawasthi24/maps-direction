@@ -10,15 +10,12 @@ export default function Input({
 }) {
   const searchBoxRef = useRef(null);
 
-  const googleMapsApiKey = 'AIzaSyBapAiSYukTGtSuJTilyGnbDoXGp3lt16Y'
+  const googleMapsApiKey = "AIzaSyBapAiSYukTGtSuJTilyGnbDoXGp3lt16Y";
 
   return (
     <div className="form-group">
       <label className="block text-gray-700">{label}:</label>
-      <LoadScript
-        googleMapsApiKey={googleMapsApiKey}
-        libraries={libraries}
-      >
+      <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={libraries}>
         <StandaloneSearchBox
           onLoad={(ref) => (searchBoxRef.current = ref)}
           onPlacesChanged={() => onPlacesChanged(searchBoxRef.current)}

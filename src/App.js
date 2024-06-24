@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import {
-  LoadScript,
-} from "@react-google-maps/api";
+import { LoadScript } from "@react-google-maps/api";
 import Header from "./components/Header";
 import AddVenues from "./components/add_venues";
 import Maps from "./components/maps";
@@ -14,6 +12,15 @@ const App = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [response, setResponse] = useState(null);
+  const [stops, setStops] = useState([""]);
+
+  const directionsCallback = (result, status) => {
+    if (status === "OK") {
+      setResponse(result);
+    } else {
+      console.error("Directions request failed due to " + status);
+    }
+  };
 
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={libraries}>
@@ -30,9 +37,18 @@ const App = () => {
             setOrigin={setOrigin}
             setDestination={setDestination}
             setResponse={setResponse}
+            stops={stops}
+            setStops={setStops}
+            directionsCallback={directionsCallback}
           />
-          
-          <Maps response={response} />
+
+          <Maps
+            response={response}
+            origin={origin}
+            destination={destination}
+            stops={stops}
+            directionsCallback={directionsCallback}
+          />
         </div>
       </div>
     </LoadScript>

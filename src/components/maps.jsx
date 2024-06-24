@@ -1,12 +1,17 @@
-import { DirectionsRenderer, GoogleMap } from '@react-google-maps/api';
-import React from 'react'
+import {
+  DirectionsRenderer,
+  DirectionsService,
+  GoogleMap,
+} from "@react-google-maps/api";
+import React from "react";
 
 const mapContainerStyle = {
   height: "100vh",
   width: "100%",
 };
 
-export default function Maps({response}) {
+export default function Maps({ response, origin, destination, stops, directionsCallback }) {
+  console.log(response);
   return (
     <div className="w-full md:w-1/2 h-full p-5">
       <GoogleMap
@@ -14,6 +19,19 @@ export default function Maps({response}) {
         zoom={6}
         center={{ lat: 20.5937, lng: 78.9629 }} // Center of India
       >
+        {origin && destination && (
+          <DirectionsService
+            options={{
+              origin: origin,
+              destination: destination,
+              waypoints: stops
+                .filter((stop) => stop !== "")
+                .map((stop) => ({ location: stop, stopover: true })),
+              // travelMode: travelMode,
+            }}
+            callback={directionsCallback}
+          />
+        )}
         {response !== null && <DirectionsRenderer directions={response} />}
       </GoogleMap>
     </div>

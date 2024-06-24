@@ -12,7 +12,7 @@ const App = () => {
   const [origin, setOrigin] = useState("");
   const [destination, setDestination] = useState("");
   const [response, setResponse] = useState(null);
-  const [stops, setStops] = useState([""]);
+  const [stops, setStops] = useState([]);
   const [mode, setMode] = useState("DRIVING");
 
   const directionsCallback = (result, status) => {

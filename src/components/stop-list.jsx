@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import Input from "./input";
 import { Autocomplete } from "@react-google-maps/api";
 import { FaCircleMinus } from "react-icons/fa6";
+import { CiCirclePlus } from "react-icons/ci";
 
 export default function StopsList({
   stops,
@@ -33,17 +34,17 @@ export default function StopsList({
   const originRef = useRef(null);
   console.log(stops);
 
-    const addStop = () => {
-      console.log(stops);
-      // let ar = stops;
-      // const newarr = ar.push("");
-      setStops([...stops, ""]);
-    };
+  const addStop = () => {
+    console.log(stops);
+    // let ar = stops;
+    // const newarr = ar.push("");
+    setStops([...stops, ""]);
+  };
 
   return (
-    <div>
+    <div className="w-3/4 flex flex-col">
       {stops.map((stop, index) => (
-        <div key={index} className="form-group">
+        <div key={index}>
           <label htmlFor="originInput" className="block mb-2">
             Stops
           </label>
@@ -65,7 +66,13 @@ export default function StopsList({
           </div>
         </div>
       ))}
-      <button onClick={addStop}>Add another Stop</button>
+      <button
+        onClick={addStop}
+        className="flex items-center gap-1 self-end mt-2"
+      >
+        <CiCirclePlus className="" />
+        Add another Stop
+      </button>
     </div>
   );
 }

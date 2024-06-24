@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { LoadScript } from "@react-google-maps/api";
 import Header from "./components/Header";
 import AddVenues from "./components/add_venues";
@@ -13,6 +13,7 @@ const App = () => {
   const [destination, setDestination] = useState("");
   const [response, setResponse] = useState(null);
   const [stops, setStops] = useState([""]);
+  const [mode, setMode] = useState("DRIVING");
 
   const directionsCallback = (result, status) => {
     if (status === "OK") {
@@ -21,13 +22,6 @@ const App = () => {
       console.error("Directions request failed due to " + status);
     }
   };
-
-    const addStop = () => {
-      console.log(stops);
-      let ar = stops;
-      ar.push("");
-      setStops(ar);
-    };
 
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={libraries}>
@@ -47,7 +41,8 @@ const App = () => {
             stops={stops}
             setStops={setStops}
             directionsCallback={directionsCallback}
-            addStop={addStop}
+            mode={mode}
+            setMode={setMode}
           />
 
           <Maps
@@ -56,6 +51,7 @@ const App = () => {
             destination={destination}
             stops={stops}
             directionsCallback={directionsCallback}
+            mode={mode}
           />
         </div>
       </div>

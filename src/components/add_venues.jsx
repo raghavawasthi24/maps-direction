@@ -1,7 +1,7 @@
 import { Autocomplete } from "@react-google-maps/api";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import StopsList from "./stop-list";
-import AddStops from "./add-stops";
+import SelectMode from "./select-mode";
 
 export default function AddVenues({
   origin,
@@ -11,8 +11,8 @@ export default function AddVenues({
   setResponse,
   stops,
   setStops,
-  addStop,
-  directionsCallback,
+  mode,
+  setMode,
 }) {
   const [distance, setDistance] = useState("");
   const [error, setError] = useState("");
@@ -108,8 +108,6 @@ export default function AddVenues({
             handlePlaceChanged={handlePlaceChanged}
           />
 
-           <AddStops addStop={addStop} />
-
           <div className="mb-4 w-3/4">
             <label htmlFor="destinationInput" className="block mb-2">
               Destination
@@ -128,6 +126,8 @@ export default function AddVenues({
               />
             </Autocomplete>
           </div>
+
+          <SelectMode mode={mode} setMode={setMode} />
         </div>
         <div className="">
           <button

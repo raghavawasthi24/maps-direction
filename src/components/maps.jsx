@@ -6,11 +6,18 @@ import {
 import React from "react";
 
 const mapContainerStyle = {
-  height: "100vh",
+  height: "90vh",
   width: "100%",
 };
 
-export default function Maps({ response, origin, destination, stops, directionsCallback }) {
+export default function Maps({
+  response,
+  origin,
+  destination,
+  stops,
+  directionsCallback,
+  mode,
+}) {
   console.log(response);
   return (
     <div className="w-full md:w-1/2 h-full p-5">
@@ -19,7 +26,7 @@ export default function Maps({ response, origin, destination, stops, directionsC
         zoom={6}
         center={{ lat: 20.5937, lng: 78.9629 }} // Center of India
       >
-        {origin && destination && (
+        {origin && destination && mode && (
           <DirectionsService
             options={{
               origin: origin,
@@ -27,7 +34,7 @@ export default function Maps({ response, origin, destination, stops, directionsC
               waypoints: stops
                 .filter((stop) => stop !== "")
                 .map((stop) => ({ location: stop, stopover: true })),
-              // travelMode: travelMode,
+              // travelMode: mode,
             }}
             callback={directionsCallback}
           />

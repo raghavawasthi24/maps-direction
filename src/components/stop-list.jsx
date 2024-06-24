@@ -31,7 +31,7 @@ export default function StopsList({ stops, setStops }) {
       {stops.map((stop, index) => (
         <div key={index} className="">
           <label htmlFor="originInput" className="block mb-2">
-            Stops
+            {`Stops ${index+1}`}
           </label>
           <div className="flex items-center gap-2">
             <Autocomplete

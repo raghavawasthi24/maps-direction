@@ -22,6 +22,13 @@ const App = () => {
     }
   };
 
+    const addStop = () => {
+      console.log(stops);
+      let ar = stops;
+      ar.push("");
+      setStops(ar);
+    };
+
   return (
     <LoadScript googleMapsApiKey={googleMapsApiKey} libraries={libraries}>
       <Header />
@@ -40,6 +47,7 @@ const App = () => {
             stops={stops}
             setStops={setStops}
             directionsCallback={directionsCallback}
+            addStop={addStop}
           />
 
           <Maps

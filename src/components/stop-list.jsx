@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import Input from "./input";
 import { Autocomplete } from "@react-google-maps/api";
+import { FaCircleMinus } from "react-icons/fa6";
 
 export default function StopsList({
   stops,
@@ -8,7 +9,7 @@ export default function StopsList({
   onPlacesChanged,
   handlePlaceChanged,
 }) {
-  const handleLocationChange = (ref,index) => {
+  const handleLocationChange = (ref, index) => {
     const place = ref.current.getPlace();
     console.log(place.formatted_address);
     if (place && place.formatted_address) {
@@ -30,33 +31,41 @@ export default function StopsList({
   };
 
   const originRef = useRef(null);
+  console.log(stops);
+
+    const addStop = () => {
+      console.log(stops);
+      // let ar = stops;
+      // const newarr = ar.push("");
+      setStops([...stops, ""]);
+    };
 
   return (
     <div>
       {stops.map((stop, index) => (
         <div key={index} className="form-group">
-          <label htmlFor="originInput" className="block font-bold mb-2">
+          <label htmlFor="originInput" className="block mb-2">
             Stops
           </label>
-          <Autocomplete
-            onLoad={(autocomplete) => (originRef.current = autocomplete)}
-            onPlaceChanged={() => handleLocationChange(originRef,index)}
-          >
-            <input
-              id="stops"
-              type="text"
-              placeholder="Enter Stop"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </Autocomplete>
-          <button
-            className="btn btn-danger mt-2"
-            onClick={() => handleRemoveStop(index)}
-          >
-            Remove
-          </button>
+          <div className="flex items-center gap-2">
+            <Autocomplete
+              onLoad={(autocomplete) => (originRef.current = autocomplete)}
+              onPlaceChanged={() => handleLocationChange(originRef, index)}
+            >
+              <input
+                id="stops"
+                type="text"
+                placeholder="Enter Stop"
+                className="w-full p-2 border border-gray-300 rounded"
+              />
+            </Autocomplete>
+            <button onClick={() => handleRemoveStop(index)}>
+              <FaCircleMinus className="text-red-500" />
+            </button>
+          </div>
         </div>
       ))}
+      <button onClick={addStop}>Add another Stop</button>
     </div>
   );
 }
